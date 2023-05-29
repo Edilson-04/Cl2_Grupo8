@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:insert="layout::head">
+<meta charset="UTF-8">
+</head>
+<body>
+	<script th:src="@{/js/web/consola/frmconsola.js}" type="text/javascript"></script>
+	<nav th:insert="layout::menu"></nav>
+	<br>
+	<button type="button" id="btnagregar" class="btn btn-primary">Agregar Nueva Categoria</button>
+	<br>
+	<table class="table" id="tblconsola">
+		<thead>
+			<tr>
+				<th scope="col">Código de Consola</th>
+				<th scope="col">Nombre de Consola</th>
+				<th scope="col">Descripcion de Consola</th>
+				<th scope="col">Actualizar</th>
+				<th scope="col">Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="consola :${lstConsolas}">
+				<td th:text="${consola.id_console}"></td>
+				<td th:text="${consola.name_console}"></td>
+				<td th:text="${consola.description}"></td>
+				<td>
+					<button type="button" class="btn btn-success btnactualizar"
+					 th:data-idconsola="${consola.id_console}"
+				     th:data-nomconsola="${consola.name_console}"
+				     th:data-descripcion="${consola.description}"
+					>
+						<i class="fas fa-pen"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" class="btn btn-danger btneliminarconsola"
+					 th:data-idconsola="${consola.id_console}"
+				     th:data-nomconsola="${consola.name_console}"
+				     th:data-descripcion="${consola.description}"
+					>
+						<i class="fas fa-trash"></i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<!-- Modal Registro / actualizacion SALA -->
+	<div class="modal fade" id="modalConsola" tabindex="-1"aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Mantenimiento Consola</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+				<div class="mb-3">
+						<label for="txtcategoria" class="form-label">Id Consola:</label> 
+						<input type="text" class="form-control" id="txtidconsola" >
+					</div>
+					<div class="mb-3">
+						<label for="txtdescripcion" class="form-label">Nombre Consola:</label> 
+						<input type="text" class="form-control" id="txtnomconsola" >
+					</div>
+					<div class="mb-3">
+						<label for="txtdescripcion" class="form-label">Descripcion Consola:</label> 
+						<input type="text" class="form-control" id="txtdesconsola" >
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary" id="btnguardar">Guardar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!-- Modal Eliminar SALA -->
+	<div class="modal fade" id="modalEliminarConsola" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar Categoria</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">		
+					<label id="mensajeeliminar"></label>
+					<input type="hidden" id="hddideliminarsala"value="0">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"data-bs-dismiss="modal">Cerrar</button>
+					<button type="button" class="btn btn-primary"id="btneliminar">Eliminar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
